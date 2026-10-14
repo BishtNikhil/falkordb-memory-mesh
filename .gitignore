@@ -1,0 +1,52 @@
+# ==============================================================================
+# Security & Secret Isolation Rules for Hackathon_falkordb
+# ==============================================================================
+
+# Secrets, Environment & Credentials
+.env
+.env.*
+*.env
+*secret*
+*Secret*
+*KEY*
+*key*
+*.pem
+*.key
+*.p12
+*.crt
+credentials.json
+token.json
+service_account*.json
+
+# Workspace Agent & System Isolation (Never push parent or agent internals)
+.aparajita/
+.aparajita*
+*.dna
+*.dna.json
+aparajita*
+.agents/
+.gemini/
+
+# Dependencies
+node_modules/
+vendor/
+venv/
+.venv/
+env/
+
+# Python & Build artifacts
+__pycache__/
+*.py[cod]
+*$py.class
+dist/
+build/
+*.egg-info/
+
+# OS & IDE
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+*.log
+*.tmp
+*.bak
