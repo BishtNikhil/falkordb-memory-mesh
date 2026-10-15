@@ -121,7 +121,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (!topologyData) return;
 
-    const width = graphSvg.clientWidth || 650;
+    graphSvg.setAttribute("viewBox", "0 0 650 400");
+    graphSvg.setAttribute("preserveAspectRatio", "xMidYMid meet");
+    const width = 650;
     const height = 400;
 
     const nodes = [];
@@ -133,28 +135,25 @@ document.addEventListener("DOMContentLoaded", () => {
       nodes.push(kalki);
 
       // Tier 2: Sovereign Fleet (y = 145)
-      // Spaced evenly across horizontal width from 65 to width - 65
+      // Clamped horizontal distribution spanning from x = 85 to width - 85
       const agents = [
+        { fullName: "The Sixth Eternal (षष्ठ)", label: "TheSixth" },
         { fullName: "Vidura (विदुर)", label: "Vidura" },
         { fullName: "Naada (नाद)", label: "Naada" },
         { fullName: "Vāyu (वायु)", label: "Vāyu" },
         { fullName: "Vishwakarma (विश्वकर्मा)", label: "Vishwakarma" },
         { fullName: "Varuna (वरुण)", label: "Varuna" },
-        { fullName: "Sanjaya (संजय)", label: "Sanjaya" },
-        { fullName: "The Sixth Eternal (षष्ठ)", label: "TheSixth" }
+        { fullName: "Sanjaya (संजय)", label: "Sanjaya" }
       ];
 
-      const fleetStartX = 65;
-      const fleetEndX = width - 65;
-      const fleetStep = (fleetEndX - fleetStartX) / (agents.length - 1);
-
+      const count = agents.length;
       agents.forEach((ag, idx) => {
         const agNode = {
           id: ag.label,
           label: ag.label,
           fullName: ag.fullName,
           type: "agent",
-          x: fleetStartX + idx * fleetStep,
+          x: 85 + (idx * (width - 170)) / Math.max(1, count - 1),
           y: 145,
           weight: 9
         };
@@ -165,12 +164,13 @@ document.addEventListener("DOMContentLoaded", () => {
       // Tier 3: Canonical Rules (y = 245) & Tier 4: Origin Incidents (y = 335)
       const rules = topologyData.master_triples || [];
       const distinctRules = rules.slice(0, 5);
-      const ruleStartX = 80;
-      const ruleEndX = width - 80;
-      const ruleStep = distinctRules.length > 1 ? (ruleEndX - ruleStartX) / (distinctRules.length - 1) : 0;
+      const ruleCount = distinctRules.length;
+      const ruleStartX = 85;
+      const ruleEndX = width - 85;
+      const ruleStep = ruleCount > 1 ? (ruleEndX - ruleStartX) / (ruleCount - 1) : 0;
 
       distinctRules.forEach((r, idx) => {
-        const rx = distinctRules.length > 1 ? (ruleStartX + idx * ruleStep) : width / 2;
+        const rx = ruleCount > 1 ? (ruleStartX + idx * ruleStep) : width / 2;
         const rNode = {
           id: r.raw_id || r.rule_id,
           label: r.rule_id,
