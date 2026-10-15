@@ -65,22 +65,30 @@
 
 ---
 
-### 1:55 – 2:15 | Security Air-Gap & 1,400 Ops/Sec Concurrency Benchmark
-- **Action 1:** Switch to the **`Quarantine Vault`** tab on the SVG canvas.
-- **Action 2:** Click **`⚡ 100-Op Concurrency Benchmark`** in the control deck. Show the modal results.
+### 1:50 – 2:05 | Multi-Agent Handoff Relay & 1,400 Ops/Sec Concurrency
+- **Action 1:** Switch to the **`CoW Shadow`** tab on the SVG canvas to show the 4-stage handoff.
+- **Action 2:** Switch to **`Quarantine Vault`** to show 18 blocked canary tokens.
+- **Action 3:** Click **`⚡ 100-Op Concurrency Benchmark`** in the control deck. Show the modal results.
 - **Narration:**
-  > "Security is guaranteed by Varuna's pre-commit AST gate. Watch our Quarantine Vault tab: 18 synthetic canary token leak attempts were intercepted and locked in `VarunaZeroSecretVault` before ever touching canonical memory.
-  > 
-  > To prove production readiness, we click our Concurrency Benchmark: 100 rapid concurrent reads and writes across three isolated multigraphs finish with **1,401 operations per second** and zero failures."
+  > "In the Shadow Clone tab, we trace a 4-stage multi-agent handoff (Kalki ➔ Varuna ➔ Vishwakarma ➔ Sanjaya) with cryptographic state hashes. In Quarantine Vault, Varuna's AST gate intercepted 18 synthetic leaks before they touched memory. Our 100-operation benchmark hits over **1,400 ops/second** across 3 multigraphs with zero errors."
 
 ---
 
-### 2:15 – 2:30 | Rule 10 Verification & Conclusion
-- **Action 1:** Quickly bring up terminal: run `python -m unittest discover -s tests` showing:
-  `Ran 13 tests in 0.435s — OK`.
-- **Action 2:** Switch back to the dashboard and conclude.
+### 2:05 – 2:20 | FalkorDB Web Studio Flash (Port 3000) & Rule 3 Audit
+- **Action 1:** Switch browser tab to `http://localhost:3000` (Official FalkorDB Web Studio).
+- **Action 2:** Select graph `purnam_studio_brain` or `shadow_aparajita`, and execute:
+  `MATCH (n)-[r]->(m) RETURN n, r, m LIMIT 50`
 - **Narration:**
-  > "All 13 unit tests pass in 0.4 seconds. The entire stack spins up with a single command via `docker compose up -d` under Rule 10, and exposes 7 MCP tools for autonomous agents.
+  > "To prove Rule 3 compliance beyond our custom dashboard, here is the official FalkorDB Web Studio running live on port 3000. You can see our live multigraph nodes and edges populated directly in FalkorDB's native visualizer, confirming that FalkorDB is driving 100% of the cognitive substrate."
+
+---
+
+### 2:20 – 2:35 | Rule 10 Verification (Unit Tests) & Conclusion
+- **Action 1:** Quickly bring up terminal: run `python -m unittest discover -s tests` showing:
+  `Ran 13 tests in 0.516s — OK`.
+- **Action 2:** Switch back to `http://localhost:8000` and conclude.
+- **Narration:**
+  > "All 13 automated unit tests pass in half a second. The entire stack spins up with a single command via `docker compose up -d` under Rule 10, and exposes 7 MCP tools for autonomous agents.
   > 
   > The Universal Memory Mesh proves that when agents think with FalkorDB graphs, they are faster, safer, and mathematically explainable. Thank you!"
 

@@ -2,6 +2,11 @@
 ### Sovereign Agent Cognitive Substrate, Ephemeral CoW Sandboxes & Graph-PACC Compaction
 **Graph Hacks 2026 Entry — Rule 5 Unified 3-Track Architecture**
 
+> **🎯 Tracks Entered (Rule 5 Qualified):**
+> - **Track 02 (Primary):** Agent Memory and Coordination
+> - **Track 01:** Agents That Act on Connected Data
+> - **Track 03:** Company Brain
+
 [![FalkorDB](https://img.shields.io/badge/FalkorDB-v1.8.0-red?logo=redis&logoColor=white)](https://falkordb.com)
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.110.0-009688?logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com)
 [![Python](https://img.shields.io/badge/Python-3.11%20%7C%203.12-blue?logo=python&logoColor=white)](https://python.org)
@@ -207,3 +212,16 @@ RETURN ar.rule_id, inc.ref, t.ticket_id, ct.channel, ct.topic;
 ## 🔒 Security & Zero-Secret Guarantee
 - **100% Zero-Leak Rule:** Synthetic canary tokens (`AIzaSy...`, `sk-...`, `ghp_...`) are intercepted by Varuna's pre-commit AST gate and locked into `VarunaZeroSecretVault`.
 - **Zero-Crash Deterministic Fallback:** All endpoints feature deterministic local routing with 0 external API dependencies. If an optional `GEMINI_API_KEY` is present, Gemini Argon translation is engaged automatically.
+
+---
+
+## 🎬 2.5-Minute Video Demonstration
+- **YouTube Demo:** `[Insert YouTube / Loom Video Link Here]` *(See [DEMO_SCRIPT.md](DEMO_SCRIPT.md) for full time-stamped narration)*
+- **Live Local Web UI:** `http://localhost:8000`
+- **FalkorDB Web Studio:** `http://localhost:3000`
+
+---
+
+## 🤖 Rule 11 Disclosure: AI Assistance
+Built and architected by Nikhil Singh Bisht (`BishtNikhil`). AI coding assistants (Antigravity IDE & Gemini) were used for pair-programming, Cypher query optimization, and frontend glassmorphism styling, with 100% human verification, local Docker benchmarking, and automated unit test validation.
+
