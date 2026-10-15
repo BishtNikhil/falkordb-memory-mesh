@@ -113,8 +113,8 @@ The service provides standard MCP tool discovery and execution endpoints at `/ap
 ### Option 1: One-Command Docker Compose (Rule 10 Compliant)
 ```bash
 # Clone the repository
-git clone https://github.com/BishtNikhil/Hackathon_falkordb.git
-cd Hackathon_falkordb
+git clone https://github.com/BishtNikhil/falkordb-memory-mesh.git
+cd falkordb-memory-mesh
 
 # Spin up FalkorDB and the FastAPI Web Service
 docker compose up -d
