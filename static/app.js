@@ -165,15 +165,20 @@ document.addEventListener("DOMContentLoaded", () => {
       const rules = topologyData.master_triples || [];
       const distinctRules = rules.slice(0, 5);
       const ruleCount = distinctRules.length;
-      const ruleStartX = 85;
-      const ruleEndX = width - 85;
+      const ruleStartX = 70;
+      const ruleEndX = width - 70;
       const ruleStep = ruleCount > 1 ? (ruleEndX - ruleStartX) / (ruleCount - 1) : 0;
 
       distinctRules.forEach((r, idx) => {
         const rx = ruleCount > 1 ? (ruleStartX + idx * ruleStep) : width / 2;
+        
+        // Compact display label for Tier 3 (strip RULE_ prefix for clean rendering)
+        const compactRuleLabel = (r.rule_id || "").replace(/^RULE_/, "");
+
         const rNode = {
           id: r.raw_id || r.rule_id,
-          label: r.rule_id,
+          label: compactRuleLabel,
+          rawLabel: r.rule_id,
           fullText: r.text,
           domain: r.domain,
           incident: r.incident,
@@ -194,10 +199,28 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // Tier 4: Origin Incident Node directly below each rule at y = 335
         if (r.incident) {
+          let incLabel = r.incident;
+          if (incLabel.includes("20260928_042") || incLabel.includes("042")) {
+            incLabel = "INC_0928_042";
+          } else if (incLabel.includes("FASTAPI")) {
+            incLabel = "FASTAPI_01";
+          } else if (incLabel.includes("EDIT")) {
+            incLabel = "REELS_EDIT_01";
+          } else if (incLabel.includes("UI")) {
+            incLabel = "REELS_UI_01";
+          } else if (incLabel.includes("EXPEDITION") || incLabel.includes("GRAPH_HACKS")) {
+            incLabel = "GH26_EXPED";
+          } else {
+            incLabel = incLabel.replace(/^INTEL_REELS_/, "").replace(/^INC_/, "");
+            if (incLabel.length > 13) incLabel = incLabel.substring(0, 13);
+          }
+
           const incNode = {
             id: `INC_${idx}_${r.incident}`,
-            label: r.incident,
+            label: incLabel,
+            rawLabel: r.incident,
             fullText: `Origin Incident Root: ${r.incident} (Traced via RULE_730/INC Provenance)`,
+            incident: r.incident,
             type: "incident",
             weight: 6,
             x: rx,
@@ -316,10 +339,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const text = document.createElementNS("http://www.w3.org/2000/svg", "text");
       text.setAttribute("x", n.x);
-      text.setAttribute("y", n.y + r + 14);
+      text.setAttribute("y", n.y + r + 13);
       text.setAttribute("text-anchor", "middle");
       text.setAttribute("fill", "#E2E8F0");
-      text.setAttribute("font-size", "10px");
+      text.setAttribute("font-size", (n.type === "rule" || n.type === "incident") ? "9.5px" : "10px");
       text.setAttribute("font-family", "var(--font-mono)");
       text.textContent = n.label;
 
@@ -327,12 +350,12 @@ document.addEventListener("DOMContentLoaded", () => {
       g.appendChild(text);
 
       g.addEventListener("click", () => {
-        inspectorBadge.textContent = `${n.type.toUpperCase()}: ${n.label}`;
+        inspectorBadge.textContent = `${n.type.toUpperCase()}: ${n.rawLabel || n.label}`;
         inspectorBadge.style.color = fill;
         inspectorContent.innerHTML = `
           <div style="margin-bottom: 4px;"><strong>Identifier:</strong> ${n.id}</div>
           <div style="margin-bottom: 4px;"><strong>Details:</strong> ${n.fullText || n.fullName || n.label}</div>
-          ${n.domain ? `<div style="font-size: 0.72rem; color: #94A3B8;">Domain: ${n.domain} | Provenance: ${n.incident || 'Canonical'} | Reinforcement Weight: ${n.weight}</div>` : ''}
+          ${n.domain || n.incident ? `<div style="font-size: 0.72rem; color: #94A3B8;">${n.domain ? `Domain: ${n.domain} | ` : ''}Provenance Root: ${n.incident || 'Canonical'} ${n.weight ? `| Reinforcement Weight: ${n.weight}` : ''}</div>` : ''}
         `;
       });
 
