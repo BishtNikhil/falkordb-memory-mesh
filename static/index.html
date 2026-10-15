@@ -126,6 +126,30 @@
           <span class="btn-label">6. Kalki Dispel & Merge</span>
         </button>
       </div>
+
+      <!-- Phase 2 Championship Operations Deck -->
+      <div class="action-buttons-row phase2-row">
+        <button class="btn btn-relay" id="btnHandoffRelay" title="Track 02: Simulate 4-agent state relay writing [:HANDED_OFF_TO] edges">
+          <span class="btn-icon">🤝</span>
+          <span class="btn-label">7. Multi-Agent Relay (4 States)</span>
+        </button>
+        <button class="btn btn-benchmark" id="btnBenchmark" title="Track 02: 100 concurrent reads/writes across 3 multigraphs">
+          <span class="btn-icon">⚡</span>
+          <span class="btn-label">8. Concurrency Benchmark (100 Ops)</span>
+        </button>
+        <button class="btn btn-blast" id="btnBlastRadius" title="Track 01 & 03: Multi-hop outage blast radius on AudioSyncEngine">
+          <span class="btn-icon">💥</span>
+          <span class="btn-label">9. Blast Radius (AudioSync)</span>
+        </button>
+        <button class="btn btn-pagerank" id="btnPageRank" title="Track 01: Native FalkorDB PageRank procedure">
+          <span class="btn-icon">📊</span>
+          <span class="btn-label">10. Native PageRank</span>
+        </button>
+        <button class="btn btn-mcp" id="btnMcpTools" title="Track 01: Standard Model Context Protocol (MCP) Tool Registry">
+          <span class="btn-icon">🛠️</span>
+          <span class="btn-label">11. MCP Tool Registry (7 Tools)</span>
+        </button>
+      </div>
     </section>
 
     <!-- Center Content: Split Visualizer & GraphRAG Assistant -->
@@ -185,9 +209,11 @@
         <!-- Query Assistant Box -->
         <div class="query-assistant-box">
           <div class="preset-prompts-row">
+            <button class="chip-prompt" data-query="Who knows about the Cloudflare Tunnel & NVENC systems?">🏢 Who Knows What</button>
+            <button class="chip-prompt" data-query="What breaks if AudioSyncEngine or TokenSentinel goes down?">💥 What Breaks?</button>
+            <button class="chip-prompt" data-query="Trace the decision history across docs, tickets, and chats for RULE_730">📜 Decision Trace (RULE_730)</button>
             <button class="chip-prompt" data-query="Who are the sovereign agents in the fleet?">👥 Fleet Roster</button>
             <button class="chip-prompt" data-query="Show canary tokens in quarantine vault">🛡️ Quarantined Canaries</button>
-            <button class="chip-prompt" data-query="List top architectural rules with provenance to incidents">📜 Incident Provenance</button>
             <button class="chip-prompt" data-query="Run Graph-PACC compaction for ui_fullstack_architecture">🎨 UI Rule Compaction</button>
           </div>
 
@@ -242,6 +268,29 @@
     </section>
 
   </main>
+
+  <!-- Phase 2 Championship Inspector Modal -->
+  <div class="modal-overlay" id="phase2ModalOverlay">
+    <div class="modal-card glass-panel" id="phase2ModalCard">
+      <div class="modal-header">
+        <div class="modal-title-group">
+          <span class="modal-icon" id="modalIcon">⚡</span>
+          <h3 id="modalTitle">Phase 2 Championship Telemetry</h3>
+        </div>
+        <div class="modal-header-actions">
+          <span class="badge badge-cyan" id="modalBadge">Track 02 Upgrade</span>
+          <button class="btn-modal-close" id="btnModalClose" title="Close Modal">&times;</button>
+        </div>
+      </div>
+      <div class="modal-body" id="modalBody">
+        <!-- Dynamically populated by app.js -->
+      </div>
+      <div class="modal-footer">
+        <span class="modal-footer-hint" id="modalFooterHint">FalkorDB Sub-Millisecond Multi-Graph Engine</span>
+        <button class="btn btn-outline" id="btnModalDismiss">Close</button>
+      </div>
+    </div>
+  </div>
 
   <!-- Toast Notification Container -->
   <div class="toast-container" id="toastContainer"></div>

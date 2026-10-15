@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 """
-FalkorDB Universal Memory Mesh — FastAPI Service
-================================================
+FalkorDB Universal Memory Mesh — FastAPI Service (Phase 2 Championship Edition)
+================================================================================
 Powers Track 01, Track 02 & Track 03 for Graph Hacks 2026.
-Serves the Obsidian Glassmorphism UI and FalkorDB Graph Operations API.
+Serves the Obsidian Glassmorphism UI, FalkorDB Graph Operations API, and MCP Registry.
 """
 
 import os
@@ -11,19 +11,20 @@ import sys
 import time
 import json
 from pathlib import Path
-from typing import Optional, Dict, Any
-from fastapi import FastAPI, HTTPException
+from typing import Optional, Dict, Any, List
+from fastapi import FastAPI, HTTPException, Body
 from fastapi.staticfiles import StaticFiles
-from fastapi.responses import FileResponse, JSONResponse
+from fastapi.responses import FileResponse, JSONResponse, Response
 from pydantic import BaseModel
 
 from falkor_memory_mesh import FalkorMemoryMesh
+from mcp_server import MCP_TOOLS, execute_mcp_tool
 
 # App Initialization
 app = FastAPI(
-    title="FalkorDB Memory Mesh Engine",
-    description="Universal Memory Mesh & CoW Shadow Clone Orchestrator for Graph Hacks 2026",
-    version="2.0.0"
+    title="FalkorDB Universal Memory Mesh Engine",
+    description="Unified 3-Track Graph Database Substrate & MCP Server for Graph Hacks 2026",
+    version="2.5.0"
 )
 
 # Initialize FalkorDB connection
@@ -43,6 +44,32 @@ class QueryRequest(BaseModel):
     prompt: str = "Show all sovereign agents and their enforced rules"
     target_graph: Optional[str] = "purnam_studio_brain"
 
+class ShortestPathRequest(BaseModel):
+    start_label: str = "Incident"
+    start_prop: str = "ref"
+    start_val: str = "INC_20261012_730"
+    end_label: str = "ProceduralPlaybook"
+    end_prop: str = "playbook_id"
+    end_val: str = "PLAY_730"
+
+class BlastRadiusRequest(BaseModel):
+    system_name: str = "AudioSyncEngine"
+
+class HandoffRelayRequest(BaseModel):
+    task: str = "Autonomous Zero-Secret Deployment & Graph Verification"
+
+class ConcurrencyRequest(BaseModel):
+    operations: int = 100
+    workers: int = 10
+
+class MCPExecuteRequest(BaseModel):
+    name: str
+    arguments: Dict[str, Any] = {}
+
+
+# =========================================================================
+# CORE TELEMETRY & LIFECYCLE ENDPOINTS
+# =========================================================================
 
 @app.get("/api/health")
 def get_health():
@@ -53,15 +80,16 @@ def get_health():
         "port": mesh.port,
         "master_graph": mesh.master_graph_name,
         "shadow_graph": mesh.shadow_graph_name,
+        "tenant_graph": mesh.tenant_graph_name,
         "zero_secret_law": "ACTIVE",
+        "mcp_tools_registered": len(MCP_TOOLS),
         "timestamp": int(time.time())
     }
 
 
 @app.post("/api/seed")
 def api_seed():
-    """Seeds Master Brain, deduplicates into edge weights, and runs Varuna quarantine."""
-    # Look for optional clone_dna.json in current or parent folder
+    """Seeds Master Brain, Company Brain, 3-tier memory, and runs Varuna quarantine."""
     dna_candidates = [
         Path("clone_dna.json"),
         Path("../.aparajita/clone_dna.json")
@@ -115,6 +143,86 @@ def api_topology():
     return mesh.get_topology_snapshot()
 
 
+# =========================================================================
+# TRACK 01: NATIVE GRAPH ALGORITHMS & MCP TOOL REGISTRY
+# =========================================================================
+
+@app.get("/api/pagerank")
+def api_pagerank(node_label: str = "ArchitecturalRule", rel_type: str = "BELONGS_TO"):
+    """Track 01: Native FalkorDB PageRank algorithm call."""
+    return mesh.run_pagerank(node_label=node_label, rel_type=rel_type)
+
+
+@app.post("/api/shortest-path")
+def api_shortest_path(req: ShortestPathRequest):
+    """Track 01: Native FalkorDB directed shortestPath between incident and playbook."""
+    return mesh.find_shortest_path(
+        start_label=req.start_label,
+        start_prop=req.start_prop,
+        start_val=req.start_val,
+        end_label=req.end_label,
+        end_prop=req.end_prop,
+        end_val=req.end_val
+    )
+
+
+@app.post("/api/blast-radius")
+def api_blast_radius(req: BlastRadiusRequest):
+    """Track 01 & 03: Multi-hop Blast Radius impact analysis."""
+    return mesh.calculate_blast_radius(system_name=req.system_name)
+
+
+@app.get("/api/mcp/tools")
+def api_mcp_tools():
+    """Returns the Model Context Protocol (MCP) Tool Registry."""
+    return {"tools": MCP_TOOLS}
+
+
+@app.post("/api/mcp/execute")
+def api_mcp_execute(req: MCPExecuteRequest):
+    """Executes an MCP tool call by name and arguments."""
+    return execute_mcp_tool(req.name, req.arguments)
+
+
+# =========================================================================
+# TRACK 02: MULTI-AGENT STATE HANDOFF RELAY & CONCURRENCY BENCHMARK
+# =========================================================================
+
+@app.post("/api/handoff-relay")
+def api_handoff_relay(req: HandoffRelayRequest):
+    """Track 02: Executes 4-agent state handoff relay: Kalki -> Varuna -> Vishwakarma -> Sanjaya."""
+    return mesh.simulate_agent_handoff_relay(mission_task=req.task)
+
+
+@app.post("/api/benchmark-concurrency")
+def api_benchmark_concurrency(req: ConcurrencyRequest):
+    """Track 02: High-Concurrency Multigraph Benchmark (100 parallel reads & writes)."""
+    return mesh.benchmark_concurrency(
+        total_operations=req.operations,
+        concurrency_workers=req.workers
+    )
+
+
+# =========================================================================
+# TRACK 03: COMPANY BRAIN & PROVENANCE
+# =========================================================================
+
+@app.get("/api/who-knows")
+def api_who_knows(system: str = ""):
+    """Track 03: Company Brain 'Who Knows What' query."""
+    return mesh.query_who_knows(system_name=system)
+
+
+@app.get("/api/decision-provenance")
+def api_decision_provenance(rule_id: str = "RULE_730_INFRASTRUC"):
+    """Track 03: Decision provenance across tickets, chats, and incidents."""
+    return mesh.trace_decision_provenance(rule_id=rule_id)
+
+
+# =========================================================================
+# HYBRID GRAPHRAG / NL-TO-CYPHER ENDPOINT
+# =========================================================================
+
 @app.post("/api/query")
 def api_nl_query(req: QueryRequest):
     """
@@ -131,7 +239,39 @@ def api_nl_query(req: QueryRequest):
     cypher = ""
     intent = "custom"
     
-    if any(k in prompt_lower for k in ["agent", "sovereign", "fleet", "commander", "who"]):
+    # Track 03 Signature Query 1: Who knows about systems?
+    if any(k in prompt_lower for k in ["who knows", "who own", "cloudflare tunnel", "nvenc", "owner of"]):
+        intent = "query_who_knows"
+        cypher = (
+            "MATCH (s:System) "
+            "MATCH (owner:SovereignAgent)-[:OWNS]->(s) "
+            "OPTIONAL MATCH (author:SovereignAgent)-[:AUTHORED]->(d:Document)-[:SPECIFIES]->(s) "
+            "OPTIONAL MATCH (resolver:SovereignAgent)-[:RESOLVED_TICKET]->(t:Ticket)-[:REFERENCES_SYSTEM]->(s) "
+            "RETURN s.name AS system, s.tier AS tier, owner.name AS owner, "
+            "       collect(DISTINCT d.title) AS documentation, collect(DISTINCT t.ticket_id) AS tickets"
+        )
+    # Track 01 & 03 Signature Query 2: Blast Radius (What breaks if service goes down?)
+    elif any(k in prompt_lower for k in ["break", "blast", "down", "fails", "tokensentinel", "audiosync"]):
+        intent = "query_blast_radius"
+        cypher = (
+            "MATCH (target:System) "
+            "WHERE toLower(target.name) CONTAINS 'audio' OR toLower(target.name) CONTAINS 'token' "
+            "OPTIONAL MATCH (downstream:System)-[:DEPENDS_ON*1..3]->(target) "
+            "OPTIONAL MATCH (target)<-[:OWNS]-(owner:SovereignAgent) "
+            "RETURN target.name AS system, owner.name AS owner, collect(DISTINCT downstream.name) AS affected_services"
+        )
+    # Track 03 Signature Query 3: Decision Provenance (rule_730)
+    elif any(k in prompt_lower for k in ["rule_730", "history", "decision", "trace", "chat", "ticket"]):
+        intent = "query_decision_provenance"
+        cypher = (
+            "MATCH (ar:ArchitecturalRule) WHERE ar.rule_id CONTAINS '730' "
+            "OPTIONAL MATCH (t:Ticket)-[:LED_TO_RULE]->(ar) "
+            "OPTIONAL MATCH (ct:ChatThread)-[:DECIDED_RULE]->(ar) "
+            "OPTIONAL MATCH (ar)-[:ORIGINATED_FROM]->(inc:Incident) "
+            "RETURN ar.rule_id AS rule, inc.ref AS incident, t.ticket_id AS ticket, ct.channel AS chat_channel, ct.topic AS chat_topic"
+        )
+    # General queries
+    elif any(k in prompt_lower for k in ["agent", "sovereign", "fleet", "commander", "who"]):
         intent = "query_fleet"
         cypher = (
             "MATCH (c:Commander)-[:COMMANDS]->(a:SovereignAgent) "
@@ -143,14 +283,7 @@ def api_nl_query(req: QueryRequest):
             "MATCH (q:QuarantineVault)-[:CONTAINS_QUARANTINED]->(qr:QuarantinedRule) "
             "RETURN qr.rule_id AS rule_id, qr.blocked_attempts AS blocked_count, qr.text AS canary_token"
         )
-    elif any(k in prompt_lower for k in ["incident", "provenance", "origin", "track 3", "brain"]):
-        intent = "query_provenance"
-        cypher = (
-            "MATCH (ar:ArchitecturalRule)-[:ORIGINATED_FROM]->(inc:Incident) "
-            "RETURN ar.rule_id AS rule_id, inc.ref AS incident_origin, ar.weight AS weight, ar.text AS directive "
-            "ORDER BY ar.weight DESC LIMIT 10"
-        )
-    elif any(k in prompt_lower for k in ["pacc", "compact", "rule", "context", "weight", "top"]):
+    elif any(k in prompt_lower for k in ["pacc", "compact", "weight", "top"]):
         intent = "query_pacc_directives"
         cypher = (
             "MATCH (a:SovereignAgent)-[e:ENFORCES]->(ar:ArchitecturalRule)-[:BELONGS_TO]->(d:Domain) "
@@ -178,7 +311,6 @@ def api_nl_query(req: QueryRequest):
         try:
             from google import genai
             client = genai.Client(api_key=gemini_key)
-            # Fetch Graph-PACC anchor to provide graph context to Gemini
             pacc_data = mesh.run_graph_pacc()
             context_str = json.dumps(pacc_data.get("ranked_directives", []))
             
@@ -225,7 +357,10 @@ def api_nl_query(req: QueryRequest):
     }
 
 
-# Mount Static Files for Obsidian Glassmorphic Web UI
+# =========================================================================
+# STATIC ASSETS & ROOT FALLBACK ROUTES
+# =========================================================================
+
 static_dir = Path(__file__).parent / "static"
 static_dir.mkdir(parents=True, exist_ok=True)
 app.mount("/static", StaticFiles(directory=str(static_dir)), name="static")
@@ -251,7 +386,6 @@ def get_js():
 @app.api_route("/favicon.ico", methods=["GET", "HEAD"])
 def get_favicon():
     """Return 204 for favicon to prevent 404 logs."""
-    from fastapi import Response
     return Response(status_code=204)
 
 
@@ -262,5 +396,6 @@ if __name__ == "__main__":
     print("="*70)
     print("📡 Web Dashboard: http://localhost:8000")
     print("⚡ FalkorDB Engine: localhost:6379")
-    print("🖥️ FalkorDB Studio: http://localhost:3000\n")
+    print("🖥️ FalkorDB Studio: http://localhost:3000")
+    print("🛠️ MCP Tool Registry: http://localhost:8000/api/mcp/tools\n")
     uvicorn.run("app:app", host="0.0.0.0", port=8000, reload=False)
