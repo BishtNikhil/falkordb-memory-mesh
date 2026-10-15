@@ -238,6 +238,22 @@ def get_root():
         return FileResponse(index_file)
     return {"message": "FalkorDB Memory Mesh Backend Active. Open /static/index.html"}
 
+@app.api_route("/style.css", methods=["GET", "HEAD"])
+def get_css():
+    """Fallback route for root style.css request."""
+    return FileResponse(static_dir / "style.css", media_type="text/css")
+
+@app.api_route("/app.js", methods=["GET", "HEAD"])
+def get_js():
+    """Fallback route for root app.js request."""
+    return FileResponse(static_dir / "app.js", media_type="application/javascript")
+
+@app.api_route("/favicon.ico", methods=["GET", "HEAD"])
+def get_favicon():
+    """Return 204 for favicon to prevent 404 logs."""
+    from fastapi import Response
+    return Response(status_code=204)
+
 
 if __name__ == "__main__":
     import uvicorn
