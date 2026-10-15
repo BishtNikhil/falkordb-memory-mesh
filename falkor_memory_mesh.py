@@ -935,10 +935,57 @@ class FalkorMemoryMesh:
             }
 
         master_nodes = self.master.query(
-            "MATCH (a:SovereignAgent)-[e:ENFORCES]->(ar:ArchitecturalRule)-[:ORIGINATED_FROM]->(inc:Incident) "
-            "RETURN a.name, ar.rule_id, ar.domain, ar.weight, inc.ref, ar.text "
-            "ORDER BY ar.weight DESC LIMIT 25"
+            "MATCH (ar:ArchitecturalRule)-[:ORIGINATED_FROM]->(inc:Incident) "
+            "OPTIONAL MATCH (a:SovereignAgent)-[:ENFORCES]->(ar) "
+            "WITH ar, inc, collect(a.name) AS agents "
+            "RETURN coalesce(agents[0], 'Kalki (कल्कि)') AS agent, "
+            "       ar.rule_id AS rule_id, "
+            "       ar.domain AS domain, "
+            "       ar.weight AS weight, "
+            "       inc.ref AS incident, "
+            "       ar.text AS text "
+            "ORDER BY ar.weight DESC LIMIT 5"
         ).result_set
+
+        def clean_rule_id(r_id, weight, text, domain):
+            r_id_u = r_id.upper()
+            text_u = text.upper()
+            if "IGDB" in text_u or "RATE LIMIT" in text_u or "042" in r_id_u or "006_SELF" in r_id_u:
+                return f"RULE_IGDB_429 (w:{weight})"
+            elif "STATIC" in text_u or "APARAJITA" in r_id_u or "002" in r_id_u:
+                return f"RULE_FASTAPI_STATIC (w:{weight})"
+            elif "VFX" in text_u or "ZOOM" in text_u or "280" in r_id_u or "VIRAL" in r_id_u:
+                return f"RULE_VFX_ZOOM (w:{weight})"
+            elif "GLASS" in text_u or "UI" in text_u or "273" in r_id_u or "023" in r_id_u:
+                return f"RULE_GLASS_UI (w:{weight})"
+            elif "1033" in text_u or "CLOUDFLARE" in text_u or "730" in r_id_u:
+                return f"RULE_CF_1033 (w:{weight})"
+            elif "SECURITY" in r_id_u or "FORBIDDEN" in text_u:
+                return f"RULE_SECURITY_AIRGAP (w:{weight})"
+            elif "DUCK" in r_id_u or "AUDIO" in text_u:
+                return f"RULE_AUDIO_DUCK (w:{weight})"
+            else:
+                short_id = r_id.replace("RULE_", "").replace("INTEL_", "")[:10]
+                return f"RULE_{short_id} (w:{weight})"
+
+        distinct_master_rules = []
+        seen_prefixes = set()
+        for r in master_nodes:
+            lbl = clean_rule_id(r[1], r[3], r[5], r[2])
+            prefix = lbl.split(" ")[0]
+            if prefix not in seen_prefixes:
+                seen_prefixes.add(prefix)
+                distinct_master_rules.append({
+                    "agent": r[0],
+                    "rule_id": lbl,
+                    "raw_id": r[1],
+                    "domain": r[2],
+                    "weight": r[3],
+                    "incident": r[4],
+                    "text": r[5]
+                })
+            if len(distinct_master_rules) >= 5:
+                break
 
         quarantine_nodes = self.master.query(
             "MATCH (q:QuarantineVault)-[:CONTAINS_QUARANTINED]->(qr:QuarantinedRule) "
@@ -967,10 +1014,7 @@ class FalkorMemoryMesh:
         return {
             "master_graph": self.master_graph_name,
             "shadow_graph": self.shadow_graph_name,
-            "master_triples": [
-                {"agent": r[0], "rule_id": r[1], "domain": r[2], "weight": r[3], "incident": r[4], "text": r[5]}
-                for r in master_nodes
-            ],
+            "master_triples": distinct_master_rules,
             "quarantined_threats": [
                 {"rule_id": r[0], "blocked_attempts": r[1], "text": r[2] if len(r) > 2 else ""} for r in quarantine_nodes
             ],

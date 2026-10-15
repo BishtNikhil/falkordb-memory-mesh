@@ -177,14 +177,16 @@
 
         <!-- Interactive Visualizer Canvas Container -->
         <div class="topology-canvas-container" id="canvasContainer">
-          <svg id="graphSvg" class="graph-svg" width="100%" height="420"></svg>
-          <div class="canvas-legend">
-            <span class="legend-item"><span class="node-swatch commander"></span> Commander Kalki</span>
-            <span class="legend-item"><span class="node-swatch agent"></span> Sovereign Fleet</span>
-            <span class="legend-item"><span class="node-swatch rule"></span> Architectural Rule</span>
-            <span class="legend-item"><span class="node-swatch incident"></span> Origin Incident</span>
-            <span class="legend-item"><span class="node-swatch quarantine"></span> Quarantined Leak</span>
-          </div>
+          <svg id="graphSvg" class="graph-svg" viewBox="0 0 650 400" preserveAspectRatio="xMidYMid meet"></svg>
+        </div>
+
+        <!-- Distinct Legend Bar (Cleanly separated below the canvas) -->
+        <div class="canvas-legend">
+          <span class="legend-item"><span class="node-swatch commander"></span> Commander Kalki</span>
+          <span class="legend-item"><span class="node-swatch agent"></span> Sovereign Fleet</span>
+          <span class="legend-item"><span class="node-swatch rule"></span> Canonical Rule</span>
+          <span class="legend-item"><span class="node-swatch incident"></span> Origin Incident</span>
+          <span class="legend-item"><span class="node-swatch quarantine"></span> Quarantined Leak</span>
         </div>
 
         <!-- Selected Node Inspector Detail -->
@@ -209,11 +211,13 @@
         <!-- Query Assistant Box -->
         <div class="query-assistant-box">
           <div class="preset-prompts-row">
+            <button class="chip-prompt" data-query="Calculate multi-hop blast radius and shortest path remediation for AudioSyncEngine">💥 Blast Radius & Shortest Path</button>
+            <button class="chip-prompt" data-query="Simulate multi-agent handoff relay across Kalki, Varuna, Vishwakarma, and Sanjaya">🤝 Multi-Agent Handoff Relay</button>
+            <button class="chip-prompt" data-query="Run 100-op high-concurrency stress test across isolated multigraphs">⚡ 100-Op Concurrency Benchmark</button>
             <button class="chip-prompt" data-query="Who knows about the Cloudflare Tunnel & NVENC systems?">🏢 Who Knows What</button>
-            <button class="chip-prompt" data-query="What breaks if AudioSyncEngine or TokenSentinel goes down?">💥 What Breaks?</button>
             <button class="chip-prompt" data-query="Trace the decision history across docs, tickets, and chats for RULE_730">📜 Decision Trace (RULE_730)</button>
-            <button class="chip-prompt" data-query="Who are the sovereign agents in the fleet?">👥 Fleet Roster</button>
             <button class="chip-prompt" data-query="Show canary tokens in quarantine vault">🛡️ Quarantined Canaries</button>
+            <button class="chip-prompt" data-query="Who are the sovereign agents in the fleet?">👥 Fleet Roster</button>
             <button class="chip-prompt" data-query="Run Graph-PACC compaction for ui_fullstack_architecture">🎨 UI Rule Compaction</button>
           </div>
 

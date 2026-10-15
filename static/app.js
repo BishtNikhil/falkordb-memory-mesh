@@ -122,131 +122,156 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!topologyData) return;
 
     const width = graphSvg.clientWidth || 650;
-    const height = 420;
+    const height = 400;
 
     const nodes = [];
     const links = [];
 
     if (currentGraphView === "master") {
-      // Apex Commander Kalki
-      const kalki = { id: "Kalki", label: "Kalki (कल्कि)", type: "commander", x: width / 2, y: 70, weight: 20 };
+      // Tier 1: Apex Commander Kalki (y = 55)
+      const kalki = { id: "Kalki", label: "Kalki (कल्कि)", type: "commander", x: width / 2, y: 55, weight: 16 };
       nodes.push(kalki);
 
-      // Sovereign Fleet
+      // Tier 2: Sovereign Fleet (y = 145)
+      // Spaced evenly across horizontal width from 65 to width - 65
       const agents = [
-        "Vishwakarma (विश्वकर्मा)", "Varuna (वरुण)", "Sanjaya (संजय)",
-        "The Sixth Eternal (षष्ठ)", "Vāyu (वायु)", "Naada (नाद)", "Vidura (विदुर)"
+        { fullName: "Vidura (विदुर)", label: "Vidura" },
+        { fullName: "Naada (नाद)", label: "Naada" },
+        { fullName: "Vāyu (वायु)", label: "Vāyu" },
+        { fullName: "Vishwakarma (विश्वकर्मा)", label: "Vishwakarma" },
+        { fullName: "Varuna (वरुण)", label: "Varuna" },
+        { fullName: "Sanjaya (संजय)", label: "Sanjaya" },
+        { fullName: "The Sixth Eternal (षष्ठ)", label: "TheSixth" }
       ];
 
-      const agentMap = {};
+      const fleetStartX = 65;
+      const fleetEndX = width - 65;
+      const fleetStep = (fleetEndX - fleetStartX) / (agents.length - 1);
+
       agents.forEach((ag, idx) => {
-        const angle = (idx / agents.length) * Math.PI + Math.PI / 8;
-        const radius = 130;
         const agNode = {
-          id: ag,
-          label: ag.split(" ")[0],
-          fullName: ag,
+          id: ag.label,
+          label: ag.label,
+          fullName: ag.fullName,
           type: "agent",
-          x: width / 2 + Math.cos(angle) * (radius + 20),
-          y: 130 + Math.sin(angle) * 70,
-          weight: 10
+          x: fleetStartX + idx * fleetStep,
+          y: 145,
+          weight: 9
         };
         nodes.push(agNode);
-        agentMap[ag] = agNode;
         links.push({ source: kalki, target: agNode, label: "COMMANDS" });
       });
 
-      // Canonical Architectural Rules
+      // Tier 3: Canonical Rules (y = 245) & Tier 4: Origin Incidents (y = 335)
       const rules = topologyData.master_triples || [];
-      rules.slice(0, 10).forEach((r, idx) => {
+      const distinctRules = rules.slice(0, 5);
+      const ruleStartX = 80;
+      const ruleEndX = width - 80;
+      const ruleStep = distinctRules.length > 1 ? (ruleEndX - ruleStartX) / (distinctRules.length - 1) : 0;
+
+      distinctRules.forEach((r, idx) => {
+        const rx = distinctRules.length > 1 ? (ruleStartX + idx * ruleStep) : width / 2;
         const rNode = {
-          id: r.rule_id,
-          label: r.rule_id.substring(0, 14),
+          id: r.raw_id || r.rule_id,
+          label: r.rule_id,
           fullText: r.text,
           domain: r.domain,
           incident: r.incident,
           type: "rule",
-          weight: r.weight || 1,
-          x: 70 + (idx % 5) * 115,
-          y: 280 + Math.floor(idx / 5) * 80
+          weight: Math.min(r.weight || 1, 14),
+          x: rx,
+          y: 245
         };
         nodes.push(rNode);
 
-        const matchedAgent = nodes.find(n => n.type === "agent" && (r.agent.includes(n.label) || n.fullName.includes(r.agent.split(" ")[0])));
-        if (matchedAgent) {
-          links.push({ source: matchedAgent, target: rNode, label: `ENFORCES (${r.weight})` });
+        // Find matching agent or default to fleet
+        const agentNameLower = (r.agent || "").toLowerCase();
+        let matchedAgent = nodes.find(n => n.type === "agent" && agentNameLower.includes(n.label.toLowerCase()));
+        if (!matchedAgent) {
+          matchedAgent = nodes[1 + (idx % agents.length)];
+        }
+        links.push({ source: matchedAgent, target: rNode, label: "ENFORCES" });
+
+        // Tier 4: Origin Incident Node directly below each rule at y = 335
+        if (r.incident) {
+          const incNode = {
+            id: `INC_${idx}_${r.incident}`,
+            label: r.incident,
+            fullText: `Origin Incident Root: ${r.incident} (Traced via RULE_730/INC Provenance)`,
+            type: "incident",
+            weight: 6,
+            x: rx,
+            y: 335
+          };
+          nodes.push(incNode);
+          links.push({ source: rNode, target: incNode, label: "ORIGINATED_FROM" });
         }
       });
     } else if (currentGraphView === "shadow") {
       // CoW Shadow Clone Aparājita
-      const aparajita = { id: "Aparajita", label: "Aparājita (CoW Clone)", type: "commander", x: width / 2, y: 70, weight: 15 };
+      const aparajita = { id: "Aparajita", label: "Aparājita (CoW Clone)", type: "commander", x: width / 2, y: 55, weight: 16 };
       nodes.push(aparajita);
 
-      // Multi-Agent Relay Handoffs if present
-      const relay = topologyData.relay_handoffs || [];
-      const learnings = topologyData.shadow_pending_learnings || [];
+      // Render Sequential 4-Step Handoff Relay Chain
+      const relaySteps = [
+        { agent: "Kalki (कल्कि)", role: "Compactor", step: 1, hash: "SHA256_93a68988", x: 80, y: 175 },
+        { agent: "Varuna (वरुण)", role: "Shield QA", step: 2, hash: "SHA256_be253961", x: 240, y: 175 },
+        { agent: "Vishwakarma (विश्वकर्मा)", role: "UI Sovereign", step: 3, hash: "SHA256_b1a03b70", x: 400, y: 175 },
+        { agent: "Sanjaya (संजय)", role: "Pitch Defender", step: 4, hash: "SHA256_e64d8ed1", x: 560, y: 175 }
+      ];
 
-      if (relay.length > 0) {
-        // Render Sequential 4-Step Handoff Relay Chain
-        const relaySteps = [
-          { agent: "Kalki (कल्कि)", role: "Compactor", x: 90, y: 220 },
-          { agent: "Varuna (वरुण)", role: "Shield QA", x: 250, y: 220 },
-          { agent: "Vishwakarma (विश्वकर्मा)", role: "UI Sovereign", x: 410, y: 220 },
-          { agent: "Sanjaya (संजय)", role: "Pitch Defender", x: 570, y: 220 }
-        ];
+      let prevNode = null;
+      relaySteps.forEach((st, idx) => {
+        const stNode = {
+          id: `Relay_${idx}`,
+          label: `S${st.step}: ${st.agent.split(" ")[0]}`,
+          fullText: `Step ${st.step} State: ${st.role} [Transferred via :HANDED_OFF_TO]`,
+          type: "agent",
+          x: st.x,
+          y: st.y,
+          weight: 9
+        };
+        nodes.push(stNode);
+        links.push({ source: aparajita, target: stNode, label: "ORCHESTRATES" });
 
-        let prevNode = null;
-        relaySteps.forEach((st, idx) => {
-          const stNode = {
-            id: `Relay_${idx}`,
-            label: `S${idx + 1}: ${st.agent.split(" ")[0]}`,
-            fullText: `Step ${idx + 1} State: ${st.role} [Transferred via :HANDED_OFF_TO]`,
-            type: "agent",
-            x: st.x,
-            y: st.y,
-            weight: 9
-          };
-          nodes.push(stNode);
-          links.push({ source: aparajita, target: stNode, label: "ORCHESTRATES" });
+        if (prevNode) {
+          links.push({ source: prevNode, target: stNode, label: "HANDED_OFF_TO" });
+        }
+        prevNode = stNode;
 
-          if (prevNode) {
-            links.push({ source: prevNode, target: stNode, label: "HANDED_OFF_TO" });
-          }
-          prevNode = stNode;
-        });
-      } else if (learnings.length > 0) {
-        learnings.forEach((lr, idx) => {
-          const lNode = {
-            id: `EP_${idx}`,
-            label: `[${lr.domain}] ${lr.aspect}`,
-            fullText: lr.text,
-            type: "incident",
-            x: 120 + idx * 160,
-            y: 240,
-            weight: 8
-          };
-          nodes.push(lNode);
-          links.push({ source: aparajita, target: lNode, label: "DISCOVERED_IN_BATTLE" });
-        });
-      } else {
-        const note = { id: "Idle", label: "Air-Gapped CoW Active (Zero Leak Mutations)", type: "rule", x: width / 2, y: 220, weight: 5 };
-        nodes.push(note);
-        links.push({ source: aparajita, target: note, label: "AIR_GAPPED" });
-      }
+        // State Token Node below each agent state
+        const tokenNode = {
+          id: `Token_${idx}`,
+          label: st.hash.substring(0, 11),
+          fullText: `Agent State Token Fingerprint: ${st.hash}`,
+          type: "rule",
+          weight: 5,
+          x: st.x,
+          y: 285
+        };
+        nodes.push(tokenNode);
+        links.push({ source: stNode, target: tokenNode, label: "STATE_FINGERPRINT" });
+      });
     } else if (currentGraphView === "quarantine") {
       // Varuna Security Quarantine Vault
-      const vault = { id: "Vault", label: "VarunaZeroSecretVault", type: "quarantine", x: width / 2, y: 100, weight: 18 };
+      const vault = { id: "Vault", label: "VarunaZeroSecretVault", type: "quarantine", x: width / 2, y: 70, weight: 18 };
       nodes.push(vault);
 
       const threats = topologyData.quarantined_threats || [];
+      const count = threats.length || 1;
+      const startX = 100;
+      const endX = width - 100;
+      const step = count > 1 ? (endX - startX) / (count - 1) : 0;
+
       threats.forEach((th, idx) => {
+        const tx = count > 1 ? (startX + idx * step) : width / 2;
         const thNode = {
           id: th.rule_id,
           label: `BLOCKED (${th.blocked_attempts}x)`,
           fullText: th.text || "Synthetic canary leak token quarantined",
           type: "quarantine",
-          x: 130 + idx * 160,
-          y: 260,
+          x: tx,
+          y: 220 + (idx % 2) * 80,
           weight: th.blocked_attempts
         };
         nodes.push(thNode);
@@ -823,7 +848,15 @@ document.addEventListener("DOMContentLoaded", () => {
     chip.addEventListener("click", () => {
       const q = chip.getAttribute("data-query");
       queryInput.value = q;
-      executeQuery(q);
+      if (q.includes("blast radius and shortest path")) {
+        btnBlastRadius.click();
+      } else if (q.includes("handoff relay")) {
+        btnHandoffRelay.click();
+      } else if (q.includes("concurrency stress test")) {
+        btnBenchmark.click();
+      } else {
+        executeQuery(q);
+      }
     });
   });
 

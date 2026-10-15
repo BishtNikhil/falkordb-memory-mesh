@@ -195,7 +195,8 @@ def api_handoff_relay(req: HandoffRelayRequest):
 
 
 @app.post("/api/benchmark-concurrency")
-def api_benchmark_concurrency(req: ConcurrencyRequest):
+@app.post("/api/benchmark")
+def api_benchmark_concurrency(req: ConcurrencyRequest = ConcurrencyRequest()):
     """Track 02: High-Concurrency Multigraph Benchmark (100 parallel reads & writes)."""
     return mesh.benchmark_concurrency(
         total_operations=req.operations,

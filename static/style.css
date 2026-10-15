@@ -495,7 +495,7 @@ body {
   position: relative;
   background: #04060A;
   border-bottom: 1px solid var(--border-subtle);
-  height: 420px;
+  height: 400px;
   overflow: hidden;
 }
 
@@ -506,18 +506,19 @@ body {
 }
 
 .canvas-legend {
-  position: absolute;
-  bottom: 12px;
-  left: 14px;
+  position: relative;
   display: flex;
-  gap: 14px;
-  background: rgba(14, 18, 28, 0.85);
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  background: rgba(10, 14, 22, 0.85);
   backdrop-filter: blur(10px);
-  padding: 6px 12px;
-  border-radius: 6px;
-  border: 1px solid var(--border-subtle);
-  font-size: 0.72rem;
+  padding: 8px 16px;
+  border-bottom: 1px solid var(--border-subtle);
+  font-size: 0.74rem;
   font-family: var(--font-mono);
+  color: var(--text-secondary);
 }
 
 .legend-item {
@@ -740,14 +741,16 @@ body {
   background: #04060A;
   border: 1px solid var(--border-subtle);
   border-radius: 6px;
-  padding: 10px 12px;
+  padding: 12px 14px;
   font-family: var(--font-mono);
-  font-size: 0.72rem;
+  font-size: 0.74rem;
   color: #CBD5E1;
-  max-height: 140px;
+  min-height: 210px;
+  max-height: 250px;
   overflow-y: auto;
   white-space: pre-wrap;
   word-break: break-all;
+  line-height: 1.5;
 }
 
 /* 5. Explainable Cypher Trace Drawer (Rule 3) */
