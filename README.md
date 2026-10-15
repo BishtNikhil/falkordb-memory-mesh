@@ -216,7 +216,8 @@ RETURN ar.rule_id, inc.ref, t.ticket_id, ct.channel, ct.topic;
 ---
 
 ## 🎬 2.5-Minute Video Demonstration
-- **YouTube Demo:** `[Insert YouTube / Loom Video Link Here]` *(See [DEMO_SCRIPT.md](DEMO_SCRIPT.md) for full time-stamped narration)*
+- **Repository Video File:** [`falkordb_championship_demo.mp4`](falkordb_championship_demo.mp4) *(Full 1080p HD walkthrough with studio AI voiceover narration, 3m 23s)*
+- **YouTube / Loom Demo:** `[Insert YouTube / Loom Video Link Here]` *(See [DEMO_SCRIPT.md](DEMO_SCRIPT.md) for full time-stamped narration)*
 - **Live Local Web UI:** `http://localhost:8000`
 - **FalkorDB Web Studio:** `http://localhost:3000`
 
