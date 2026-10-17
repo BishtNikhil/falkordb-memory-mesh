@@ -398,7 +398,13 @@ def get_js():
 
 @app.api_route("/favicon.ico", methods=["GET", "HEAD"])
 def get_favicon():
-    """Return 204 for favicon to prevent 404 logs."""
+    """Serves the favicon logo."""
+    fav = static_dir / "favicon.ico"
+    if fav.exists():
+        return FileResponse(fav, media_type="image/x-icon")
+    fav_svg = static_dir / "favicon.svg"
+    if fav_svg.exists():
+        return FileResponse(fav_svg, media_type="image/svg+xml")
     return Response(status_code=204)
 
 
