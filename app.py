@@ -30,6 +30,18 @@ app = FastAPI(
 # Initialize FalkorDB connection
 mesh = FalkorMemoryMesh()
 
+@app.on_event("startup")
+def auto_seed_on_startup():
+    """Auto-seeds Master Brain on startup if connected to FalkorDB for instant WOW dashboard visuals."""
+    if mesh.connected:
+        try:
+            print("[Startup] Auto-seeding FalkorDB Master Brain for instant dashboard visualizer...")
+            mesh.seed_master_brain()
+            print("[Startup] Master Brain auto-seeded successfully!")
+        except Exception as e:
+            print(f"[Startup Warning] Auto-seed error: {e}")
+
+
 # Models
 class LearningRequest(BaseModel):
     aspect: str = "Vishwakarma"

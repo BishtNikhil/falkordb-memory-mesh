@@ -108,6 +108,10 @@ class FalkorMemoryMesh:
         self.master_graph_name = "purnam_studio_brain"
         self.shadow_graph_name = "shadow_aparajita"
         self.tenant_graph_name = "tenant_sandbox_01"
+        self.client = None
+        self.master = None
+        self.shadow = None
+        self.tenant = None
         
         try:
             kwargs = {"host": self.host, "port": self.port}

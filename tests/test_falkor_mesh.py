@@ -25,6 +25,11 @@ class TestFalkorMemoryMesh(unittest.TestCase):
     def setUpClass(cls):
         """Initializes mesh connection once for entire test suite."""
         cls.mesh = FalkorMemoryMesh()
+        if not cls.mesh.connected:
+            raise unittest.SkipTest(
+                "FalkorDB is not reachable on localhost:6379. "
+                "To execute live Graph Hacks tests, start FalkorDB via: docker compose up -d"
+            )
 
     def test_01_falkordb_connection(self):
         """Test 1: Live connection to FalkorDB on port 6379."""
