@@ -11,7 +11,7 @@ WORKSPACE = r"e:\Promptwars2026\Hackathon_falkordb"
 BRAIN_DIR = r"C:\Users\Saurav Bisht\.gemini\antigravity-ide\brain\9acd4efa-5a73-4be8-90f7-c8b6c0e60dd2"
 AUDIO_DIR = os.path.join(WORKSPACE, "audio_processed")
 MASTER_WAV = os.path.join(AUDIO_DIR, "master_narration_v5.wav")
-CAPTIONS_JSON = os.path.join(AUDIO_DIR, "synced_captions_v5.json")
+CAPTIONS_JSON = os.path.join(AUDIO_DIR, "authoritative_script_captions.json")
 FINAL_MP4 = os.path.join(WORKSPACE, "falkordb_championship_demo.mp4")
 
 W, H = 1920, 1080
@@ -91,7 +91,7 @@ scene_3_topo = prepare_panel(
 scene_4_ingest = Image.open(os.path.join(BRAIN_DIR, "v5_scene_ingestion_pipeline.png"))
 
 # 5. Track 02 Varuna Zero-Secret Quarantine Vault
-scene_5_varuna = Image.open(os.path.join(BRAIN_DIR, "v4_varuna_quarantine.png"))
+scene_5_varuna = Image.open(os.path.join(BRAIN_DIR, "v5_scene_varuna_quarantine.png"))
 
 # 6. Track 02 4-Stage CoW Ephemeral Sandbox Relay Modal
 scene_6_relay = prepare_centered_modal(

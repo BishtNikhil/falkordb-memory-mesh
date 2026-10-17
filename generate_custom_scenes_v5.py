@@ -210,7 +210,7 @@ d.rounded_rectangle([(ax2 + 35, 520), (ax2 + 765, 820)], radius=12, fill=(14, 32
 d.text((ax2 + 55, 545), "ACTIVE GRAPH-PACC ANCHOR (<300 TOKENS):", font=FONT_CODE_BOLD, fill=GREEN)
 anchor_sample = (
     "{\n"
-    "  \"agent\": \"The Sixth Eternal (षष्ठ)\",\n"
+    "  \"agent\": \"The Sixth Eternal\",\n"
     "  \"top_centrality_rule\": \"RULE_042_SELF_HEALING\",\n"
     "  \"PageRank_Score\": 0.1842,\n"
     "  \"context_tokens\": 201,\n"
@@ -254,8 +254,8 @@ d.rectangle([(120, 550), (W - 120, 610)], fill=(18, 24, 38))
 d.text((150, 565), "GRAPH EXECUTION RESULT [Traversed 5 Nodes in purnam_studio_brain in 10.03ms]:", font=FONT_TITLE, fill=GREEN)
 
 rows = [
-    ("Owner: Naada (नाद)", "Tier: P0_CRITICAL", "Doc: 184.6 BPM Transient Beat Matching Standard", "Ticket: TIK_255"),
-    ("Owner: Varuna (वरुण)", "Tier: P1_CORE", "Doc: Cloudflare Tunnel Autonomous Failover Playbook", "Ticket: TIK_730")
+    ("Owner: Agent Naada", "Tier: P0_CRITICAL", "Doc: 184.6 BPM Transient Beat Matching Standard", "Ticket: TIK_255"),
+    ("Owner: Agent Varuna", "Tier: P1_CORE", "Doc: Cloudflare Tunnel Autonomous Failover Playbook", "Ticket: TIK_730")
 ]
 for idx, (c1, c2, c3, c4) in enumerate(rows):
     ry = 630 + idx * 95
