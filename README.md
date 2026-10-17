@@ -13,6 +13,7 @@
 [![Docker](https://img.shields.io/badge/Docker-Compose%20Ready-2496ED?logo=docker&logoColor=white)](https://docker.com)
 [![Tests](https://img.shields.io/badge/Tests-13%2F13%20Passing-brightgreen?logo=pytest&logoColor=white)]()
 [![Demo Video](https://img.shields.io/badge/Demo%20Video-Google%20Drive%20Stream-4285F4?logo=googledrive&logoColor=white)](https://drive.google.com/file/d/1O8HnDkXfpSWhePtibJLHWNN46M4Nct5E/view?usp=sharing)
+[![Blog Post](https://img.shields.io/badge/Blog%20Post-AirPods%205%20Entry-black?logo=devdotto&logoColor=white)](BLOG_POST.md)
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 ---
@@ -49,7 +50,7 @@ All metrics recorded directly from live FalkorDB container `cadfdc424da2` runnin
 
 ```mermaid
 graph TD
-    subgraph Master Brain [purnam_studio_brain]
+    subgraph MasterBrain["Master Brain (purnam_studio_brain)"]
         Kalki["Commander Kalki (कल्कि)"]
         Fleet["Sovereign Fleet (8 Agents)"]
         Rules["Canonical Architectural Rules (93 Nodes)"]
@@ -74,14 +75,14 @@ graph TD
         Chats -->|DECIDED_RULE| Rules
     end
 
-    subgraph Varuna Shield [Security Air-Gap]
+    subgraph VarunaShield["Varuna Shield (Security Air-Gap)"]
         Vault["VarunaZeroSecretVault"]
         Quarantine["Quarantined Canary Leaks (18 Blocked)"]
         Fleet -->|GUARDS| Vault
         Vault -->|CONTAINS_QUARANTINED| Quarantine
     end
 
-    subgraph CoW Sandbox [shadow_aparajita]
+    subgraph CoW_Sandbox["CoW Sandbox (shadow_aparajita)"]
         Clone["ShadowClone: Aparājita (अपराजित)"]
         State1["S1: Kalki (Intent & PACC)"]
         State2["S2: Varuna (Security QA)"]
@@ -94,8 +95,8 @@ graph TD
         State3 -->|HANDED_OFF_TO| State4
     end
 
-    MasterBrain -.->|spawn_cow_shadow_clone| CoW_Sandbox
-    CoW_Sandbox -.->|dispel_and_merge_clone (Varuna Audited)| MasterBrain
+    MasterBrain -.->|"spawn_cow_shadow_clone"| CoW_Sandbox
+    CoW_Sandbox -.->|"dispel_and_merge_clone (Varuna Audited)"| MasterBrain
 ```
 
 ---
@@ -216,7 +217,7 @@ RETURN ar.rule_id, inc.ref, t.ticket_id, ct.channel, ct.topic;
 
 ---
 
-## 🎬 2.5-Minute Video Demonstration
+## 🎬 Championship Video Demonstration (1080p Full HD)
 
 > 🍿 **Direct Video Stream (Instant 1080p Full HD Playback — No Download Required):**  
 > 🔗 [**Stream Championship Demo on Google Drive**](https://drive.google.com/file/d/1O8HnDkXfpSWhePtibJLHWNN46M4Nct5E/view?usp=sharing) *(Public Access: Anyone with the link can view)*
