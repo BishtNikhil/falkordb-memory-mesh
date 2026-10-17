@@ -50,7 +50,18 @@ Thumbs.db
 *.log
 *.tmp
 *.bak
+# Temporary & Intermediate Video/Audio Scratch Assets
+video_build*/
 video_build/
 video_build_v2/
-User_VoiceOver/
-audio_processed/
+*voiceover*/
+*VoiceOver*/
+*voice_over*/
+*Voice_Over*/
+audio_processed*/
+*.wav
+*.mp3
+*.aac
+*.m4a
+*.raw
+verify_*.png
