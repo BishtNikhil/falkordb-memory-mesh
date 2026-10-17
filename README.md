@@ -12,6 +12,7 @@
 [![Python](https://img.shields.io/badge/Python-3.11%20%7C%203.12-blue?logo=python&logoColor=white)](https://python.org)
 [![Docker](https://img.shields.io/badge/Docker-Compose%20Ready-2496ED?logo=docker&logoColor=white)](https://docker.com)
 [![Tests](https://img.shields.io/badge/Tests-13%2F13%20Passing-brightgreen?logo=pytest&logoColor=white)]()
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-falkordb.purnamstudio.com-00F0FF?logo=cloudflare&logoColor=white)](https://falkordb.purnamstudio.com)
 [![Demo Video](https://img.shields.io/badge/Demo%20Video-Google%20Drive%20Stream-4285F4?logo=googledrive&logoColor=white)](https://drive.google.com/file/d/1O8HnDkXfpSWhePtibJLHWNN46M4Nct5E/view?usp=sharing)
 [![Blog Post](https://img.shields.io/badge/Blog%20Post-AirPods%205%20Entry-black?logo=devdotto&logoColor=white)](BLOG_POST.md)
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
@@ -143,10 +144,11 @@ python app.py
 ```
 
 ### Dashboard & Services Ports:
+- **🌐 Live Production Deployment:** [https://falkordb.purnamstudio.com](https://falkordb.purnamstudio.com) *(Cloudflare Tunnel Secure HTTPS)*
 - **Interactive Web Dashboard:** [http://localhost:8000](http://localhost:8000)
 - **FalkorDB Web Studio:** [http://localhost:3000](http://localhost:3000)
 - **FalkorDB Redis/Cypher Engine:** `localhost:6379`
-- **MCP Tool Registry:** [http://localhost:8000/api/mcp/tools](http://localhost:8000/api/mcp/tools)
+- **MCP Tool Registry:** [https://falkordb.purnamstudio.com/api/mcp/tools](https://falkordb.purnamstudio.com/api/mcp/tools)
 
 ---
 
@@ -222,6 +224,7 @@ RETURN ar.rule_id, inc.ref, t.ticket_id, ct.channel, ct.topic;
 > 🍿 **Direct Video Stream (Instant 1080p Full HD Playback — No Download Required):**  
 > 🔗 [**Stream Championship Demo on Google Drive**](https://drive.google.com/file/d/1O8HnDkXfpSWhePtibJLHWNN46M4Nct5E/view?usp=sharing) *(Public Access: Anyone with the link can view)*
 
+- **Live Public Web Service:** [https://falkordb.purnamstudio.com](https://falkordb.purnamstudio.com)
 - **Direct Stream URL:** [https://drive.google.com/file/d/1O8HnDkXfpSWhePtibJLHWNN46M4Nct5E/view?usp=sharing](https://drive.google.com/file/d/1O8HnDkXfpSWhePtibJLHWNN46M4Nct5E/view?usp=sharing)
 - **Repository Video File:** [`falkordb_championship_demo.mp4`](falkordb_championship_demo.mp4) *(Full 1080p HD walkthrough with synchronized voiceover narration, 3m 29s)*
 - **Authoritative Script & Transcript:** See [`DEMO_SCRIPT.md`](DEMO_SCRIPT.md) for full time-stamped word-for-word narration
