@@ -51,3 +51,6 @@ Thumbs.db
 *.tmp
 *.bak
 video_build/
+video_build_v2/
+User_VoiceOver/
+audio_processed/
