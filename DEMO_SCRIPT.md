@@ -3,6 +3,7 @@
 *Video Target Length: 2 minutes 30 seconds*  
 *Target Audience: Hackathon Judges (FalkorDB & WeMakeDevs)*  
 *Screen: Browser open at `http://localhost:8000` with FalkorDB running in Docker*  
+*Demo Video Stream: [Google Drive 1080p Stream](https://drive.google.com/file/d/1O8HnDkXfpSWhePtibJLHWNN46M4Nct5E/view?usp=sharing)*  
 *Tone: Confident, fast-paced, high-signal, enterprise-grade*
 
 ---

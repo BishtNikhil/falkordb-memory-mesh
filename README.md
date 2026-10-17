@@ -12,6 +12,7 @@
 [![Python](https://img.shields.io/badge/Python-3.11%20%7C%203.12-blue?logo=python&logoColor=white)](https://python.org)
 [![Docker](https://img.shields.io/badge/Docker-Compose%20Ready-2496ED?logo=docker&logoColor=white)](https://docker.com)
 [![Tests](https://img.shields.io/badge/Tests-13%2F13%20Passing-brightgreen?logo=pytest&logoColor=white)]()
+[![Demo Video](https://img.shields.io/badge/Demo%20Video-Google%20Drive%20Stream-4285F4?logo=googledrive&logoColor=white)](https://drive.google.com/file/d/1O8HnDkXfpSWhePtibJLHWNN46M4Nct5E/view?usp=sharing)
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 ---
@@ -216,8 +217,13 @@ RETURN ar.rule_id, inc.ref, t.ticket_id, ct.channel, ct.topic;
 ---
 
 ## 🎬 2.5-Minute Video Demonstration
-- **Repository Video File:** [`falkordb_championship_demo.mp4`](falkordb_championship_demo.mp4) *(Full 1080p HD walkthrough with studio AI voiceover narration, 3m 23s)*
-- **YouTube / Loom Demo:** `[Insert YouTube / Loom Video Link Here]` *(See [DEMO_SCRIPT.md](DEMO_SCRIPT.md) for full time-stamped narration)*
+
+> 🍿 **Direct Video Stream (Instant 1080p Full HD Playback — No Download Required):**  
+> 🔗 [**Stream Championship Demo on Google Drive**](https://drive.google.com/file/d/1O8HnDkXfpSWhePtibJLHWNN46M4Nct5E/view?usp=sharing) *(Public Access: Anyone with the link can view)*
+
+- **Direct Stream URL:** [https://drive.google.com/file/d/1O8HnDkXfpSWhePtibJLHWNN46M4Nct5E/view?usp=sharing](https://drive.google.com/file/d/1O8HnDkXfpSWhePtibJLHWNN46M4Nct5E/view?usp=sharing)
+- **Repository Video File:** [`falkordb_championship_demo.mp4`](falkordb_championship_demo.mp4) *(Full 1080p HD walkthrough with synchronized voiceover narration, 3m 29s)*
+- **Authoritative Script & Transcript:** See [`DEMO_SCRIPT.md`](DEMO_SCRIPT.md) for full time-stamped word-for-word narration
 - **Live Local Web UI:** `http://localhost:8000`
 - **FalkorDB Web Studio:** `http://localhost:3000`
 
