@@ -15,6 +15,7 @@
 [![Live Demo](https://img.shields.io/badge/Live%20Demo-falkordb.purnamstudio.com-00F0FF?logo=cloudflare&logoColor=white)](https://falkordb.purnamstudio.com)
 [![Demo Video](https://img.shields.io/badge/Demo%20Video-Google%20Drive%20Stream-4285F4?logo=googledrive&logoColor=white)](https://drive.google.com/file/d/1O8HnDkXfpSWhePtibJLHWNN46M4Nct5E/view?usp=sharing)
 [![Dev.to Blog Post](https://img.shields.io/badge/Dev.to-AirPods%205%20Entry-black?logo=devdotto&logoColor=white)](https://dev.to/nikhil_bisht_a8b58d0cb04a/why-flat-json-agent-memory-fails-building-a-copy-on-write-multi-agent-memory-mesh-on-falkordb-22ie)
+[![Medium Article](https://img.shields.io/badge/Medium-AirPods%205%20Entry-12100E?logo=medium&logoColor=white)](https://medium.com/@nikhilbisht.301/why-flat-json-agent-memory-fails-building-a-copy-on-write-multi-agent-memory-mesh-on-falkordb-2838ead68459)
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 ---
@@ -225,7 +226,8 @@ RETURN ar.rule_id, inc.ref, t.ticket_id, ct.channel, ct.topic;
 > 🔗 [**Stream Championship Demo on Google Drive**](https://drive.google.com/file/d/1O8HnDkXfpSWhePtibJLHWNN46M4Nct5E/view?usp=sharing) *(Public Access: Anyone with the link can view)*
 
 - **Live Public Web Service:** [https://falkordb.purnamstudio.com](https://falkordb.purnamstudio.com)
-- **Live Dev.to Article (AirPods 5 Entry):** [Why Flat JSON Agent Memory Fails](https://dev.to/nikhil_bisht_a8b58d0cb04a/why-flat-json-agent-memory-fails-building-a-copy-on-write-multi-agent-memory-mesh-on-falkordb-22ie)
+- **Live Dev.to Article (AirPods 5 Entry):** [Why Flat JSON Agent Memory Fails (Dev.to)](https://dev.to/nikhil_bisht_a8b58d0cb04a/why-flat-json-agent-memory-fails-building-a-copy-on-write-multi-agent-memory-mesh-on-falkordb-22ie)
+- **Live Medium Article (AirPods 5 Entry):** [Why Flat JSON Agent Memory Fails (Medium)](https://medium.com/@nikhilbisht.301/why-flat-json-agent-memory-fails-building-a-copy-on-write-multi-agent-memory-mesh-on-falkordb-2838ead68459)
 - **Direct Stream URL:** [https://drive.google.com/file/d/1O8HnDkXfpSWhePtibJLHWNN46M4Nct5E/view?usp=sharing](https://drive.google.com/file/d/1O8HnDkXfpSWhePtibJLHWNN46M4Nct5E/view?usp=sharing)
 - **Repository Video File:** [`falkordb_championship_demo.mp4`](falkordb_championship_demo.mp4) *(Full 1080p HD walkthrough with synchronized voiceover narration, 3m 29s)*
 - **Authoritative Script & Transcript:** See [`DEMO_SCRIPT.md`](DEMO_SCRIPT.md) for full time-stamped word-for-word narration
