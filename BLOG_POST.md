@@ -1,7 +1,7 @@
 # Why Flat JSON Agent Memory Fails: Building a Copy-on-Write Multi-Agent Memory Mesh on FalkorDB
 
 *Authored for Graph Hacks 2026 (FalkorDB & WeMakeDevs)*  
-*Target Track: All 3 Tracks (Track 01, Track 02, Track 03) + AirPods 5 Best Technical Article Award*  
+*Target Track: Rule 5 Unified Architecture (Track 01, Track 02, Track 03)*  
 *Live Repository: [github.com/BishtNikhil/falkordb-memory-mesh](https://github.com/BishtNikhil/falkordb-memory-mesh)*  
 *Live Web Deployment: [falkordb.purnamstudio.com](https://falkordb.purnamstudio.com)*  
 *Demo Video Stream: [Google Drive 1080p Stream](https://drive.google.com/file/d/1O8HnDkXfpSWhePtibJLHWNN46M4Nct5E/view?usp=sharing)*
