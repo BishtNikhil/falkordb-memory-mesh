@@ -20,27 +20,18 @@ Whether you use Redis key-value strings, Vector RAG embeddings, or rolling JSON 
 
 To solve this, we built the **Universal Memory Mesh (Pūrṇam Studio Sovereign Fleet)**—a multigraph cognitive substrate powered natively by **FalkorDB**.
 
-```
-                ┌────────────────────────────────────────┐
-                │        COMMANDER KALKI (कल्कि)          │
-                └───────────────────┬────────────────────┘
-                                    │ :COMMANDS
-          ┌─────────────┬───────────┴───────────┬─────────────┐
-          ▼             ▼                       ▼             ▼
-     TheSixth        Vidura                   Naada        Varuna... (Fleet)
-          │             │                       │             │
-          └─────────────┴───────────┬───────────┴─────────────┘
-                                    │ :ENFORCES
-                                    ▼
-                     ┌─────────────────────────────┐
-                     │  CANONICAL ARCHITECTURAL    │
-                     │  RULES (PageRank Weighted)  │
-                     └──────────────┬──────────────┘
-                                    │ :ORIGINATED_FROM
-                                    ▼
-                     ┌─────────────────────────────┐
-                     │   ORIGIN INCIDENTS (DAG)    │
-                     └─────────────────────────────┘
+![FalkorDB Universal Memory Mesh 4-Tier Topology](https://raw.githubusercontent.com/BishtNikhil/falkordb-memory-mesh/main/blog_assets/01_dashboard_4tier_topology.png)
+
+```mermaid
+graph TD
+    Kalki["Commander Kalki (कल्कि)"]
+    Fleet["Sovereign Fleet (8 Agents)"]
+    Rules["Canonical Architectural Rules (93 Nodes)"]
+    Incidents["Origin Incidents (DAG)"]
+
+    Kalki -->|COMMANDS| Fleet
+    Fleet -->|ENFORCES| Rules
+    Rules -->|ORIGINATED_FROM| Incidents
 ```
 
 ---
